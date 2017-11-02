@@ -7,11 +7,11 @@ var syncRequest = require('sync-request');
 var streaming = new bitflyer.Streaming();
 
 // ストリーミングで約定取得
-streaming.subscribeExecutions(function (err,message) {
+streaming.subscribeExecutionsFx(function (err,message) {
 	// エラー出力
 	if(err) return console.error(err);
 	console.log(
-		"[execution__BTC_JPY]",
+		"[execution__FX_BTC_JPY]",
 		"count", message.length,
 	);
 	
@@ -19,7 +19,7 @@ streaming.subscribeExecutions(function (err,message) {
 	var data = JSON.stringify(message) + "\n";
 	
 	// 記録
-	fs.appendFile('data/execution_BTC_JPY.dat', data, (err) => {
+	fs.appendFile('data/execution_FX_BTC_JPY.dat', data, (err) => {
 		if(err){
 			console.log("append data fail!",err);
 		}
@@ -27,11 +27,11 @@ streaming.subscribeExecutions(function (err,message) {
 });
 	
 // ストリーミングでTicker取得
-streaming.subscribeTicker(function (err,message) {
+streaming.subscribeTickerFx(function (err,message) {
 	// エラー出力
 	if(err) return console.error(err);
 	console.log(
-		"[ticker_____BTC_JPY]",
+		"[ticker_____FX_BTC_JPY]",
 		"timestamp", message.timestamp,
 		"ltp", message.ltp,
 	);
@@ -40,7 +40,7 @@ streaming.subscribeTicker(function (err,message) {
 	var data = JSON.stringify(message) + "\n";
 	
 	// 記録
-	fs.appendFile('data/ticker_BTC_JPY.dat', data, (err) => {
+	fs.appendFile('data/ticker_FX_BTC_JPY.dat', data, (err) => {
 		if(err){
 			console.log("append data fail!",err);
 		}
@@ -48,12 +48,12 @@ streaming.subscribeTicker(function (err,message) {
 });
 	
 // ストリーミングでBoard取得
-streaming.subscribeBoardSnapshot(function (err,message) {
+streaming.subscribeBoardSnapshotFx(function (err,message) {
 	// エラー出力
 	if(err) return console.error(err);
 	message.timestamp = moment().toISOString();
 	console.log(
-		"[boardsnap_BTC_JPY]",
+		"[boardsnap_FX_BTC_JPY]",
 		"timestamp", message.timestamp,
 		"mid_price", message.mid_price,
 		"asks", message.asks.length,
@@ -64,7 +64,7 @@ streaming.subscribeBoardSnapshot(function (err,message) {
 	var data = JSON.stringify(message) + "\n";
 	
 	// 記録
-	fs.appendFile('data/board_snapshot_BTC_JPY.dat', data, (err) => {
+	fs.appendFile('data/board_snapshot_FX_BTC_JPY.dat', data, (err) => {
 		if(err){
 			console.log("append data fail!",err);
 		}
@@ -72,12 +72,12 @@ streaming.subscribeBoardSnapshot(function (err,message) {
 });
 
 // ストリーミングでBoard差分取得
-streaming.subscribeBoard(function (err,message) {
+streaming.subscribeBoardFx(function (err,message) {
 	// エラー出力
 	if(err) return console.error(err);
 	message.timestamp = moment().toISOString();
 	console.log(
-		"[board______BTC_JPY]",
+		"[board______FX_BTC_JPY]",
 		"timestamp", message.timestamp,
 		"mid_price", message.mid_price,
 		"asks", message.asks.length,
@@ -88,7 +88,7 @@ streaming.subscribeBoard(function (err,message) {
 	var data = JSON.stringify(message) + "\n";
 	
 	// 記録
-	fs.appendFile('data/board_BTC_JPY.dat', data, (err) => {
+	fs.appendFile('data/board_FX_BTC_JPY.dat', data, (err) => {
 		if(err){
 			console.log("append data fail!",err);
 		}
