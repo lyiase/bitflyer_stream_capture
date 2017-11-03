@@ -6,7 +6,7 @@ setInterval(function(){
 	// BTC_JPYのboardstateを取得
 	request('https://api.bitflyer.com/v1/getboardstate?product_code=BTC_JPY',function(err,res,body){
 		
-		if (err && res.statusCode != 200){
+		if (err || res == null || res.statusCode != 200){
 			console.error(err);
 			return;
 		}
@@ -27,7 +27,7 @@ setInterval(function(){
 	// FX_BTC_JPYのboardstateを取得
 	request('https://api.bitflyer.com/v1/getboardstate?product_code=FX_BTC_JPY',function(err,res,body){
 		
-		if (err && res.statusCode != 200){
+		if (err || res == null || res.statusCode != 200){
 			console.error(err);
 			return;
 		}
